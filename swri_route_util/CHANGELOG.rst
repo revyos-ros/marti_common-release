@@ -2,6 +2,20 @@
 Changelog for package swri_route_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.7.3 (2024-09-18)
+------------------
+
+3.7.2 (2024-09-16)
+------------------
+
+3.7.1 (2024-09-06)
+------------------
+
+3.7.0 (2024-09-06)
+------------------
+* Cleaning up package maintainer (`#721 <https://github.com/swri-robotics/marti_common/issues/721>`_)
+* Contributors: David Anthony
+
 3.6.1 (2023-09-11)
 ------------------
 * Fixing Buildfarm Issues (`#716 <https://github.com/swri-robotics/marti_common/issues/716>`_)
