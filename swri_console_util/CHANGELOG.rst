@@ -2,6 +2,46 @@
 Changelog for package swri_console_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.8.4 (2025-06-10)
+------------------
+
+3.8.3 (2025-06-03)
+------------------
+
+3.8.2 (2025-06-02)
+------------------
+* Dependency cleanup (`#774 <https://github.com/swri-robotics/marti_common/issues/774>`_)
+* Contributors: DangitBen
+
+3.8.1 (2025-05-29)
+------------------
+
+3.8.0 (2025-05-27)
+------------------
+* Updates for Rolling (`#771 <https://github.com/swri-robotics/marti_common/issues/771>`_)
+  * Removed obsolete ament macros
+  * Removed boost in favor of standard library functionality
+  * Deprecated swri_system_util
+* Contributors: David Anthony
+
+3.7.6 (2025-05-22)
+------------------
+* Reverting changes back to 3.7.4 (`#770 <https://github.com/swri-robotics/marti_common/issues/770>`_)
+* Contributors: David Anthony
+
+3.7.5 (2025-05-20)
+------------------
+* Rolling Updates (`#767 <https://github.com/swri-robotics/marti_common/issues/767>`_)
+  * Updating with new header file names
+  * Removing deprecated ament calls
+  ---------
+  Co-authored-by: David V. Lu!! <davidvlu@gmail.com>
+* [kilted] Update deprecated calls to ament_target_dependencies (`#763 <https://github.com/swri-robotics/marti_common/issues/763>`_)
+* Contributors: David Anthony, David V. Lu!!
+
+3.7.4 (2025-04-14)
+------------------
+
 3.7.3 (2024-09-18)
 ------------------
 
