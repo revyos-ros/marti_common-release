@@ -1,32 +1,23 @@
 cmake_minimum_required(VERSION 3.10)
 project(swri_image_util)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 find_package(ament_cmake REQUIRED)
 find_package(ament_index_cpp REQUIRED)
-find_package(camera_calibration_parsers REQUIRED)
 find_package(cv_bridge REQUIRED)
-find_package(geometry_msgs REQUIRED)
-find_package(image_geometry REQUIRED)
+find_package(Eigen3 REQUIRED)
 find_package(image_transport REQUIRED)
 find_package(message_filters REQUIRED)
-find_package(nav_msgs REQUIRED)
+find_package(OpenCV REQUIRED core highgui imgproc stitching)
+find_package(rcl_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rclpy REQUIRED)
-find_package(std_msgs REQUIRED)
 find_package(swri_geometry_util REQUIRED)
-find_package(swri_math_util REQUIRED)
 find_package(swri_opencv_util REQUIRED)
-find_package(swri_roscpp REQUIRED)
 find_package(tf2 REQUIRED)
 
-find_package(OpenCV REQUIRED COMPONENTS core stitching)
-
-find_package(Boost REQUIRED COMPONENTS filesystem system random)
-
-find_package(Eigen3 REQUIRED)
 add_definitions(${EIGEN3_DEFINITIONS})
 
 add_library(${PROJECT_NAME} SHARED
@@ -40,38 +31,19 @@ add_library(${PROJECT_NAME} SHARED
 )
 target_include_directories(${PROJECT_NAME}
   PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-set_property(TARGET ${PROJECT_NAME}
-  PROPERTY POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(${PROJECT_NAME}
-  Boost::boost
-  Boost::filesystem
-  Boost::random
-  Boost::system
-  Eigen3::Eigen
-  opencv_core
-  opencv_stitching
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
 )
 
-ament_target_dependencies(${PROJECT_NAME}
-  camera_calibration_parsers
-  cv_bridge
-  geometry_msgs
-  image_geometry
-  image_transport
-  message_filters
-  nav_msgs
-  rclcpp
-  rclcpp_components
-  std_msgs
-  swri_geometry_util
-  swri_math_util
-  swri_opencv_util
-  swri_roscpp
-  tf2
-)
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  ${swri_opencv_util_TARGETS}
+  opencv_core
+  opencv_highgui
+  opencv_imgproc
+  opencv_stitching
+  rclcpp::rclcpp
+  tf2::tf2)
+target_link_libraries(${PROJECT_NAME} PRIVATE Eigen3::Eigen ${swri_geometry_util_TARGETS})
 
 add_library(${PROJECT_NAME}_nodes SHARED
   src/nodes/blend_images_node.cpp
@@ -86,8 +58,8 @@ add_library(${PROJECT_NAME}_nodes SHARED
   #src/nodes/replace_colors_node.cpp
   src/nodes/rotate_image_node.cpp
   src/nodes/scale_image_node.cpp
-  src/nodes/warp_image_node.cpp
-)
+  src/nodes/warp_image_node.cpp)
+
 target_compile_definitions(${PROJECT_NAME}_nodes
   PRIVATE "COMPOSITION_BUILDING_DLL")
 rclcpp_components_register_nodes(${PROJECT_NAME}_nodes "swri_image_util::BlendImagesNode")
@@ -103,9 +75,16 @@ rclcpp_components_register_nodes(${PROJECT_NAME}_nodes "swri_image_util::Normali
 rclcpp_components_register_nodes(${PROJECT_NAME}_nodes "swri_image_util::RotateImageNode")
 rclcpp_components_register_nodes(${PROJECT_NAME}_nodes "swri_image_util::ScaleImageNode")
 rclcpp_components_register_nodes(${PROJECT_NAME}_nodes "swri_image_util::WarpImageNode")
-target_link_libraries(${PROJECT_NAME}_nodes ${PROJECT_NAME})
-ament_target_dependencies(${PROJECT_NAME}_nodes
-  ament_index_cpp
+
+target_link_libraries(${PROJECT_NAME}_nodes PRIVATE
+    ${PROJECT_NAME}
+    ament_index_cpp::ament_index_cpp
+    cv_bridge::cv_bridge
+    image_transport::image_transport
+    message_filters::message_filters
+    rclcpp_components::component
+    rclcpp_components::component_manager
+    ${rcl_interfaces_TARGETS}
 )
 
 # Iron and later switched some cv_bridge files to .hpp from .h
@@ -120,19 +99,23 @@ if(BUILD_TESTING)
 endif()
 
 install(DIRECTORY include/
-  DESTINATION include
-)
+  DESTINATION include/${PROJECT_NAME})
 
 install(TARGETS ${PROJECT_NAME}
-    ${PROJECT_NAME}_nodes
+  EXPORT export_${PROJECT_NAME}
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+  ARCHIVE DESTINATION lib)
+
+install(TARGETS ${PROJECT_NAME}_nodes
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib)
+
+ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
+ament_export_dependencies(OpenCV
+  rclcpp
+  swri_opencv_util
+  tf2
 )
-
-ament_export_dependencies(ament_cmake)
-ament_export_include_directories(include)
-ament_export_libraries(${PROJECT_NAME}
-  ${PROJECT_NAME}_nodes)
-
 ament_package()
