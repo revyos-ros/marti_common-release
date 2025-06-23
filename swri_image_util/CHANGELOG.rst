@@ -2,6 +2,53 @@
 Changelog for package swri_image_util
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.8.4 (2025-06-10)
+------------------
+* Add dependency on libopencv-dev for pkgs directly using OpenCV (`#781 <https://github.com/swri-robotics/marti_common/issues/781>`_)
+* Contributors: Christophe Bedard
+
+3.8.3 (2025-06-03)
+------------------
+
+3.8.2 (2025-06-02)
+------------------
+* Dependency cleanup (`#774 <https://github.com/swri-robotics/marti_common/issues/774>`_)
+* Contributors: DangitBen
+
+3.8.1 (2025-05-29)
+------------------
+* Finding message_filters package (`#773 <https://github.com/swri-robotics/marti_common/issues/773>`_)
+* Modernize cmake targets and exporting (`#772 <https://github.com/swri-robotics/marti_common/issues/772>`_)
+* Contributors: David Anthony, Ben Andrew
+
+3.8.0 (2025-05-27)
+------------------
+* Updates for Rolling (`#771 <https://github.com/swri-robotics/marti_common/issues/771>`_)
+  * Removed obsolete ament macros
+  * Removed boost in favor of standard library functionality
+  * Deprecated swri_system_util
+* Contributors: David Anthony
+
+3.7.6 (2025-05-22)
+------------------
+* Reverting changes back to 3.7.4 (`#770 <https://github.com/swri-robotics/marti_common/issues/770>`_)
+* Contributors: David Anthony
+
+3.7.5 (2025-05-20)
+------------------
+* Rolling Updates (`#767 <https://github.com/swri-robotics/marti_common/issues/767>`_)
+  * Updating with new header file names
+  * Removing deprecated ament calls
+  ---------
+  Co-authored-by: David V. Lu!! <davidvlu@gmail.com>
+* [kilted] Update deprecated calls to ament_target_dependencies (`#763 <https://github.com/swri-robotics/marti_common/issues/763>`_)
+* Contributors: David Anthony, David V. Lu!!
+
+3.7.4 (2025-04-14)
+------------------
+* use random library (`#762 <https://github.com/swri-robotics/marti_common/issues/762>`_)
+* Contributors: dfranklin-swri
+
 3.7.3 (2024-09-18)
 ------------------
 * Removing ros_environment usage in favor of directly checking package versions (`#754 <https://github.com/swri-robotics/marti_common/issues/754>`_)
