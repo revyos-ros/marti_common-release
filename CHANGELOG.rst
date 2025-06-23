@@ -2,6 +2,55 @@
 Changelog for package swri_roscpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.8.4 (2025-06-10)
+------------------
+* Fix swri roscpp srv to topic (`#776 <https://github.com/swri-robotics/marti_common/issues/776>`_)
+  * Change generate_topic_service_files install location to match ROS 2 conventions
+  * update generate_topic_service_files to match ROS 2 conventions (snake_case and .hpp)
+  ---------
+  Co-authored-by: Ben Andrew <benjamin.andrew@swri.org>
+* Contributors: DangitBen
+
+3.8.3 (2025-06-03)
+------------------
+* Make generate_topic_service_files installation location match ROS 2 Convention  (`#775 <https://github.com/swri-robotics/marti_common/issues/775>`_)
+* Contributors: DangitBen
+
+3.8.2 (2025-06-02)
+------------------
+* Dependency cleanup (`#774 <https://github.com/swri-robotics/marti_common/issues/774>`_)
+* Contributors: DangitBen
+
+3.8.1 (2025-05-29)
+------------------
+* Modernize cmake targets and exporting (`#772 <https://github.com/swri-robotics/marti_common/issues/772>`_)
+* Contributors: David Anthony, Ben Andrew
+
+3.8.0 (2025-05-27)
+------------------
+* Updates for Rolling (`#771 <https://github.com/swri-robotics/marti_common/issues/771>`_)
+  * Removed obsolete ament macros
+  * Removed boost in favor of standard library functionality
+  * Deprecated swri_system_util
+* Contributors: David Anthony
+
+3.7.6 (2025-05-22)
+------------------
+* Reverting changes back to 3.7.4 (`#770 <https://github.com/swri-robotics/marti_common/issues/770>`_)
+* Contributors: David Anthony
+
+3.7.5 (2025-05-20)
+------------------
+* Rolling Updates (`#767 <https://github.com/swri-robotics/marti_common/issues/767>`_)
+  * Updating with new header file names
+  * Removing deprecated ament calls
+  ---------
+  Co-authored-by: David V. Lu!! <davidvlu@gmail.com>
+* Contributors: David Anthony
+
+3.7.4 (2025-04-14)
+------------------
+
 3.7.3 (2024-09-18)
 ------------------
 
